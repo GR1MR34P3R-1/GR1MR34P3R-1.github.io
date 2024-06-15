@@ -15,7 +15,10 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-size: 10px; /* Adjust the font size to make the donut smaller */
+        }
+        pre {
+            font-size: 8px; /* Smaller font size for a smaller donut */
+            line-height: 6px; /* Adjust line height for better spacing */
         }
     </style>
 </head>
@@ -45,9 +48,9 @@
                         var m = Math.cos(B);
                         var n = Math.sin(B);
                         var t = c * h * g - f * e;
-                        var x = 40 + 30 * D * (l * h * m - t * n);
-                        var y = 12 + 15 * D * (l * h * n + t * m);
-                        var o = Math.floor(x + 80 * y);
+                        var x = Math.floor(40 + 30 * D * (l * h * m - t * n));
+                        var y = Math.floor(12 + 15 * D * (l * h * n + t * m));
+                        var o = x + 80 * y;
                         var N = Math.floor(8 * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n));
                         if (22 > y && y > 0 && x > 0 && 80 > x && D > zbuffer[o]) {
                             zbuffer[o] = D;
