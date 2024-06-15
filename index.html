@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinning Donut</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: black;
+            color: white;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-size: 10px; /* Adjust the font size to make the donut smaller */
+        }
+    </style>
+</head>
+<body>
+    <pre id="donut"></pre>
+    <script>
+        (function() {
+            var A = 0, B = 0;
+            var preTag = document.getElementById('donut');
+            var interval = setInterval(function() {
+                var output = [];
+                var zbuffer = [];
+                for (var k = 0; k < 1760; k++) {
+                    output[k] = k % 80 === 79 ? "\n" : " ";
+                    zbuffer[k] = 0;
+                }
+                for (var j = 0; j < 6.28; j += 0.07) {
+                    for (var i = 0; i < 6.28; i += 0.02) {
+                        var c = Math.sin(i);
+                        var d = Math.cos(j);
+                        var e = Math.sin(A);
+                        var f = Math.sin(j);
+                        var g = Math.cos(A);
+                        var h = d + 2;
+                        var D = 1 / (c * h * e + f * g + 5);
+                        var l = Math.cos(i);
+                        var m = Math.cos(B);
+                        var n = Math.sin(B);
+                        var t = c * h * g - f * e;
+                        var x = 40 + 30 * D * (l * h * m - t * n);
+                        var y = 12 + 15 * D * (l * h * n + t * m);
+                        var o = Math.floor(x + 80 * y);
+                        var N = Math.floor(8 * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n));
+                        if (22 > y && y > 0 && x > 0 && 80 > x && D > zbuffer[o]) {
+                            zbuffer[o] = D;
+                            output[o] = ".,-~:;=!*#$@"[N > 0 ? N : 0];
+                        }
+                    }
+                }
+                preTag.innerHTML = output.join("");
+                A += 0.04;
+                B += 0.02;
+            }, 30);
+        })();
+    </script>
+</body>
+</html>
